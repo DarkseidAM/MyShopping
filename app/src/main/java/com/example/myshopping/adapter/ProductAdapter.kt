@@ -8,8 +8,10 @@ import com.example.myshopping.databinding.ProductItemBinding
 import com.example.myshopping.model.Product
 import javax.inject.Inject
 
-class ProductAdapter @Inject constructor() : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter @Inject constructor() :
+    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
     var products: List<Product> = emptyList()
+    var listener: OnInteractionListener? = null
 
     inner class ViewHolder(private val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -17,7 +19,10 @@ class ProductAdapter @Inject constructor() : RecyclerView.Adapter<ProductAdapter
             Glide.with(binding.root).load(product.image_url).into(binding.productIV)
             binding.productNameTV.text = product.name
             binding.productPriceTV.text = product.price
-            binding.productRatingRB.rating = product.rating?.toFloat() ?: Float.fromBits(0)
+            binding.productRatingRB.rating = product.rating.toFloat()
+            binding.productIV.setOnClickListener {
+                listener?.onItemSelected(product)
+            }
         }
     }
 
@@ -32,4 +37,12 @@ class ProductAdapter @Inject constructor() : RecyclerView.Adapter<ProductAdapter
         holder.bind(products[position])
 
     override fun getItemCount(): Int = products.size
+
+    fun setOnInteractionListener(listener: OnInteractionListener) {
+        this.listener = listener
+    }
+
+    interface OnInteractionListener {
+        fun onItemSelected(product: Product)
+    }
 }

@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import com.example.myshopping.adapter.ProductAdapter
 import com.example.myshopping.databinding.FragmentProductBinding
 import com.example.myshopping.model.Loading
+import com.example.myshopping.model.Product
 import com.example.myshopping.model.ServiceError
 import com.example.myshopping.model.Success
+import com.example.myshopping.viewmodel.CartViewModel
 import com.example.myshopping.viewmodel.ProductViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +21,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProductsFragment : Fragment() {
     private lateinit var binding: FragmentProductBinding
-    private val viewModel: ProductViewModel by viewModels()
+    private val productViewModel: ProductViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
 
     @Inject
     lateinit var productAdapter: ProductAdapter
@@ -36,10 +39,19 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpObservers()
+        handleClickEvents()
+    }
+
+    private fun handleClickEvents() {
+        productAdapter.setOnInteractionListener(object : ProductAdapter.OnInteractionListener{
+            override fun onItemSelected(product: Product) {
+                cartViewModel.addProductsToCart(product)
+            }
+        })
     }
 
     private fun setUpObservers() {
-        viewModel.getProductScreenStates().observe(viewLifecycleOwner) { state ->
+        productViewModel.getProductScreenStates().observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Loading -> {
                     binding.shimmerLayout.startShimmer()
@@ -59,7 +71,6 @@ class ProductsFragment : Fragment() {
                     ).show()
                 }
                 else -> {}
-
             }
         }
     }

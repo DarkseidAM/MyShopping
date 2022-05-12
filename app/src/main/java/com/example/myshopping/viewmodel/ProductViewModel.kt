@@ -7,6 +7,7 @@ import com.example.myshopping.model.ApiResponseState
 import com.example.myshopping.model.Loading
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import repository.CartRepository
 import repository.ProductRepository
 import javax.inject.Inject
 
@@ -26,6 +27,5 @@ class ProductViewModel @Inject constructor(private val repository: ProductReposi
             val state = repository.getProducts()
             productScreenStates.postValue(state)
         }
-
     }
 }
