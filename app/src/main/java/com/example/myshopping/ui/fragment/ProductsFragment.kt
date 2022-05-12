@@ -56,7 +56,7 @@ class ProductsFragment : Fragment() {
                         binding.root,
                         "There is some problem with your network",
                         Snackbar.LENGTH_LONG
-                    )
+                    ).show()
                 }
                 else -> {}
 

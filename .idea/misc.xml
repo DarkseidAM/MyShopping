@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ADHMATHU/AndroidStudioProjects/MyShopping/app/src/main/res/drawable/baseline_shopping_cart_24.xml" value="0.1585" />
         <entry key="..\:/Users/ADHMATHU/AndroidStudioProjects/MyShopping/app/src/main/res/layout/activity_main.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/ADHMATHU/AndroidStudioProjects/MyShopping/app/src/main/res/layout/app_bar.xml" value="0.393173198482933" />
         <entry key="..\:/Users/ADHMATHU/AndroidStudioProjects/MyShopping/app/src/main/res/layout/fragment_product.xml" value="0.1609375" />
         <entry key="..\:/Users/ADHMATHU/AndroidStudioProjects/MyShopping/app/src/main/res/layout/product_item.xml" value="0.8333333333333334" />
         <entry key="..\:/Users/ADHMATHU/AndroidStudioProjects/MyShopping/app/src/main/res/layout/product_item_shimmer_placeholder.xml" value="0.5" />
+        <entry key="..\:/Users/ADHMATHU/AndroidStudioProjects/MyShopping/app/src/main/res/menu/top_app_bar.xml" value="0.4466666666666667" />
       </map>
     </option>
   </component>
