@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.myshopping.R
 import com.example.myshopping.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.topAppBar)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+        window.isStatusBarContrastEnforced = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
