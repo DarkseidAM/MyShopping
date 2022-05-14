@@ -1,6 +1,5 @@
 package com.example.myshopping.ui.fragment
 
-import interfaces.AppFlowListener
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import androidx.navigation.Navigation
 import com.example.myshopping.R
 import com.example.myshopping.databinding.FragmentConfirmationBinding
 import dagger.hilt.android.AndroidEntryPoint
+import interfaces.AppFlowListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -45,7 +45,7 @@ class ConfirmationFragment : Fragment() {
                 .navigate(R.id.action_confirmationFragment_to_productsFragment)
         }
         CoroutineScope(Dispatchers.Main).launch {
-            delay(10000)
+            delay(resources.getString(R.string.confirmation_timeout).toLong())
             binding.confirmProgress.visibility = View.GONE
             binding.confirmCL.visibility = View.VISIBLE
             binding.continueBtn.setOnClickListener {

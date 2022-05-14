@@ -1,6 +1,5 @@
 package com.example.myshopping.ui.fragment
 
-import interfaces.AppFlowListener
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +18,7 @@ import com.example.myshopping.model.Success
 import com.example.myshopping.viewmodel.CartViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import interfaces.AppFlowListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -69,13 +69,14 @@ class CartFragment : Fragment() {
         binding.checkoutBtn.setOnClickListener {
             listener?.onConfirmationFragment()
             cartViewModel.removeAllProductsFromCart()
-            Navigation.findNavController(it).navigate(R.id.action_cartFragment_to_confirmationFragment)
+            Navigation.findNavController(it)
+                .navigate(R.id.action_cartFragment_to_confirmationFragment)
         }
     }
 
     private fun setUpObservers() {
-        cartViewModel.getCartScreenStates().observe(viewLifecycleOwner){state->
-            when(state) {
+        cartViewModel.getCartScreenStates().observe(viewLifecycleOwner) { state ->
+            when (state) {
                 is Loading -> {
                     binding.shimmerLayout.startShimmer()
                 }
@@ -84,7 +85,8 @@ class CartFragment : Fragment() {
                     cartAdapter.cartProducts = state.response?.products ?: emptyList()
                     binding.cartRV.adapter = cartAdapter
                     binding.cartRV.visibility = View.VISIBLE
-                    binding.checkoutBtn.visibility = View.VISIBLE
+                    binding.buttonCL.visibility =
+                        if (cartAdapter.cartProducts.isEmpty()) View.GONE else View.VISIBLE
                 }
                 is ServiceError -> {
                     binding.shimmerLayout.visibility = View.GONE
@@ -97,7 +99,7 @@ class CartFragment : Fragment() {
                 else -> {}
             }
         }
-        cartViewModel.getCartProducts().observe(viewLifecycleOwner) {products->
+        cartViewModel.getCartProducts().observe(viewLifecycleOwner) { products ->
             cartAdapter.cartProducts = products ?: emptyList()
             binding.cartRV.adapter = cartAdapter
         }
