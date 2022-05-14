@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import com.example.myshopping.R
 import com.example.myshopping.databinding.FragmentConfirmationBinding
 import dagger.hilt.android.AndroidEntryPoint
-import interfaces.AppFlowListener
+import com.example.myshopping.interfaces.AppFlowListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

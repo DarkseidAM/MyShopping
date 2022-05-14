@@ -1,4 +1,4 @@
-package repository
+package com.example.myshopping.repository
 
 import com.example.myshopping.database.CartDao
 import com.example.myshopping.model.Product

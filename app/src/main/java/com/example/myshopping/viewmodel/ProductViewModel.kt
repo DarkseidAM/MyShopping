@@ -7,7 +7,7 @@ import com.example.myshopping.model.ResponseStates
 import com.example.myshopping.model.Loading
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import repository.ProductRepository
+import com.example.myshopping.repository.ProductRepository
 import javax.inject.Inject
 
 @HiltViewModel

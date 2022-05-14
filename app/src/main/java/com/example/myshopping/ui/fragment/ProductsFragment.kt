@@ -17,7 +17,7 @@ import com.example.myshopping.viewmodel.CartViewModel
 import com.example.myshopping.viewmodel.ProductViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import interfaces.AppFlowListener
+import com.example.myshopping.interfaces.AppFlowListener
 import javax.inject.Inject
 
 @AndroidEntryPoint

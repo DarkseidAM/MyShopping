@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myshopping.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import repository.CartRepository
+import com.example.myshopping.repository.CartRepository
 import javax.inject.Inject
 
 @HiltViewModel

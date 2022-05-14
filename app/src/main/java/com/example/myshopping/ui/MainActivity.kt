@@ -1,6 +1,6 @@
 package com.example.myshopping.ui
 
-import interfaces.AppFlowListener
+import com.example.myshopping.interfaces.AppFlowListener
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem

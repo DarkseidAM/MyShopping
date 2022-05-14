@@ -1,4 +1,4 @@
-package interfaces
+package com.example.myshopping.interfaces
 
 interface AppFlowListener {
 
