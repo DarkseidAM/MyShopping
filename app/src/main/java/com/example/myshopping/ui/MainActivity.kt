@@ -3,12 +3,11 @@ package com.example.myshopping.ui
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
 import com.example.myshopping.R
 import com.example.myshopping.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.topAppBar)
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)
-        window.isStatusBarContrastEnforced = false
+//        window.isStatusBarContrastEnforced = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -32,11 +31,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
             R.id.shopping_cart -> {
-                Toast.makeText(
-                    baseContext,
-                    "There is some problem with your network",
-                    Toast.LENGTH_LONG
-                )
+                Navigation.findNavController(this, R.id.nav_host_fragment)
+                    .navigate(R.id.action_productsFragment_to_cartFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

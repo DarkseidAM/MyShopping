@@ -1,6 +1,6 @@
 package repository
 
-import com.example.myshopping.model.ApiResponseState
+import com.example.myshopping.model.ResponseStates
 import com.example.myshopping.model.ProductEntity
 import com.example.myshopping.model.ServiceError
 import com.example.myshopping.model.Success
@@ -9,7 +9,7 @@ import retrofit2.Response
 
 class ProductRepository(private val apiService: ApiService) {
 
-    suspend fun getProducts(): ApiResponseState {
+    suspend fun getProducts(): ResponseStates {
         var response: Response<ProductEntity>? = null
         try {
             response = apiService.getProducts()

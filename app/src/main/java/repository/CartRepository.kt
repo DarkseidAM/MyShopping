@@ -6,7 +6,9 @@ import javax.inject.Inject
 
 class CartRepository @Inject constructor(private val cartDao: CartDao) {
 
-    fun addProductToCart(product: Product) = cartDao.addToCart(product)
+    suspend fun addProductToCart(product: Product) = cartDao.addToCart(product)
 
-    fun getProductsFromCart() = cartDao.getAllProductsInCart()
+    suspend fun removeProductFromCart(product: Product) = cartDao.deleteFromCart(product)
+
+    suspend fun getProductsFromCart() = cartDao.getAllProductsInCart()
 }

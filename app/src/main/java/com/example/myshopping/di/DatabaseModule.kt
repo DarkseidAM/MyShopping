@@ -23,7 +23,7 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideCartDatabase(@ApplicationContext context: Context): CartDatabase =
-        Room.databaseBuilder(context, CartDatabase::class.java, "Cart").allowMainThreadQueries().build()
+        Room.databaseBuilder(context, CartDatabase::class.java, "Cart").build()
 
     @Singleton
     @Provides

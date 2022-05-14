@@ -3,18 +3,17 @@ package com.example.myshopping.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myshopping.model.ApiResponseState
+import com.example.myshopping.model.ResponseStates
 import com.example.myshopping.model.Loading
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import repository.CartRepository
 import repository.ProductRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(private val repository: ProductRepository) :
     ViewModel() {
-    private val productScreenStates = MutableLiveData<ApiResponseState?>()
+    private val productScreenStates = MutableLiveData<ResponseStates?>()
     fun getProductScreenStates() = productScreenStates
 
     init {

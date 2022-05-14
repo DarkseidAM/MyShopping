@@ -2,8 +2,10 @@ package com.example.myshopping.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myshopping.R
 import com.example.myshopping.databinding.ProductItemBinding
 import com.example.myshopping.model.Product
 import javax.inject.Inject
@@ -16,12 +18,24 @@ class ProductAdapter @Inject constructor() :
     inner class ViewHolder(private val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
-            Glide.with(binding.root).load(product.image_url).into(binding.productIV)
+            Glide.with(binding.root).load(product.image_url)
+                .placeholder(R.color.shimmer_placeholder).into(binding.productIV)
             binding.productNameTV.text = product.name
-            binding.productPriceTV.text = product.price
+            binding.productPriceTV.text = "₹${product.price}"
             binding.productRatingRB.rating = product.rating.toFloat()
-            binding.productIV.setOnClickListener {
-                listener?.onItemSelected(product)
+            if (product.added) {
+                buttonAdded(binding.productAddBtn)
+            } else {
+                buttonToAdd(binding.productAddBtn)
+            }
+            binding.productAddBtn.setOnClickListener {
+                if (product.added) {
+                    buttonToAdd(binding.productAddBtn)
+                    listener?.onItemRemoved(product)
+                } else {
+                    buttonAdded(binding.productAddBtn)
+                    listener?.onItemAdded(product)
+                }
             }
         }
     }
@@ -42,7 +56,20 @@ class ProductAdapter @Inject constructor() :
         this.listener = listener
     }
 
+    private fun buttonToAdd(button: AppCompatButton) {
+        button.setBackgroundColor(button.context.resources.getColor(R.color.orange))
+        button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_add_24, 0, 0, 0)
+        button.text = "Add To Cart"
+    }
+
+    private fun buttonAdded(button: AppCompatButton) {
+        button.setBackgroundColor(button.context.resources.getColor(R.color.shimmer_placeholder))
+        button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_done_24, 0, 0, 0)
+        button.text = "Added To Cart"
+    }
+
     interface OnInteractionListener {
-        fun onItemSelected(product: Product)
+        fun onItemAdded(product: Product)
+        fun onItemRemoved(product: Product)
     }
 }

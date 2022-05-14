@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/productIV"
@@ -22,6 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:inputType="textMultiLine"
+        android:maxLines="2"
+        android:singleLine="false"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/productIV"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Name" />
@@ -43,5 +48,17 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/productPriceTV"
         app:layout_constraintTop_toBottomOf="@+id/productPriceTV" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/productAddBtn"
+        android:layout_width="135dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/orange"
+        android:drawableStart="@drawable/baseline_add_24"
+        android:text="@string/add_to_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/productRatingRB" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

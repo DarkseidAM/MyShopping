@@ -43,9 +43,15 @@ class ProductsFragment : Fragment() {
     }
 
     private fun handleClickEvents() {
-        productAdapter.setOnInteractionListener(object : ProductAdapter.OnInteractionListener{
-            override fun onItemSelected(product: Product) {
+        productAdapter.setOnInteractionListener(object : ProductAdapter.OnInteractionListener {
+            override fun onItemAdded(product: Product) {
+                product.added = true
                 cartViewModel.addProductsToCart(product)
+            }
+
+            override fun onItemRemoved(product: Product) {
+                product.added = false
+                cartViewModel.removeProductsFromCart(product)
             }
         })
     }
@@ -58,9 +64,17 @@ class ProductsFragment : Fragment() {
                 }
                 is Success -> {
                     binding.shimmerLayout.visibility = View.GONE
-                    productAdapter.products = state.apiResponse?.products ?: emptyList()
-                    binding.productRV.adapter = productAdapter
-                    binding.productRV.visibility = View.VISIBLE
+                    cartViewModel.getCartProducts().observe(viewLifecycleOwner) { list ->
+                        val productsList = state.response?.products?.toMutableList()
+                        if (list != null) {
+                            for (product in list) {
+                                productsList?.find { it.name == product.name }?.added = true
+                            }
+                        }
+                        productAdapter.products = productsList ?: emptyList()
+                        binding.productRV.adapter = productAdapter
+                        binding.productRV.visibility = View.VISIBLE
+                    }
                 }
                 is ServiceError -> {
                     binding.shimmerLayout.visibility = View.GONE
