@@ -2,6 +2,7 @@ package com.example.myshopping.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -57,13 +58,13 @@ class ProductAdapter @Inject constructor() :
     }
 
     private fun buttonToAdd(button: AppCompatButton) {
-        button.setBackgroundColor(button.context.resources.getColor(R.color.orange))
+        button.background = AppCompatResources.getDrawable(button.context, R.drawable.btn_bg)
         button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_add_24, 0, 0, 0)
         button.text = "Add To Cart"
     }
 
     private fun buttonAdded(button: AppCompatButton) {
-        button.setBackgroundColor(button.context.resources.getColor(R.color.shimmer_placeholder))
+        button.background = AppCompatResources.getDrawable(button.context, R.drawable.btn_bg_shimmer)
         button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_done_24, 0, 0, 0)
         button.text = "Added To Cart"
     }

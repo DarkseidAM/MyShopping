@@ -1,5 +1,6 @@
 package com.example.myshopping.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.example.myshopping.viewmodel.CartViewModel
 import com.example.myshopping.viewmodel.ProductViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import interfaces.AppFlowListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,9 +25,15 @@ class ProductsFragment : Fragment() {
     private lateinit var binding: FragmentProductBinding
     private val productViewModel: ProductViewModel by viewModels()
     private val cartViewModel: CartViewModel by viewModels()
+    private var listener: AppFlowListener? = null
 
     @Inject
     lateinit var productAdapter: ProductAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as? AppFlowListener
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +48,11 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpObservers()
         handleClickEvents()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        listener?.onProductsFragment()
     }
 
     private fun handleClickEvents() {

@@ -1,11 +1,16 @@
 package com.example.myshopping.ui.fragment
 
+import interfaces.AppFlowListener
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import com.example.myshopping.R
 import com.example.myshopping.adapter.CartAdapter
 import com.example.myshopping.databinding.FragmentCartBinding
 import com.example.myshopping.model.Loading
@@ -20,9 +25,20 @@ import javax.inject.Inject
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private val cartViewModel: CartViewModel by viewModels()
+    private var listener: AppFlowListener? = null
 
     @Inject
     lateinit var cartAdapter: CartAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as? AppFlowListener
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +55,22 @@ class CartFragment : Fragment() {
         handleClickActions()
     }
 
+    override fun onResume() {
+        super.onResume()
+        listener?.onCartFragment()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.shopping_cart).isVisible = false
+        super.onPrepareOptionsMenu(menu)
+    }
+
     private fun handleClickActions() {
-        binding.checkoutBtn.setOnClickListener {  }
+        binding.checkoutBtn.setOnClickListener {
+            listener?.onConfirmationFragment()
+            cartViewModel.removeAllProductsFromCart()
+            Navigation.findNavController(it).navigate(R.id.action_cartFragment_to_confirmationFragment)
+        }
     }
 
     private fun setUpObservers() {

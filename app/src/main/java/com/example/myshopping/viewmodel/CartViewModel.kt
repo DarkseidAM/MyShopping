@@ -33,6 +33,12 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
         }
     }
 
+    fun removeAllProductsFromCart() {
+        viewModelScope.launch {
+            repository.deleteAllProductsFromCart()
+        }
+    }
+
     private fun getProductsFromCart() {
         cartScreenStates.postValue(Loading)
         viewModelScope.launch {

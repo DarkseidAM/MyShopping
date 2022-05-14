@@ -15,5 +15,23 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.myshopping.ui.fragment.CartFragment"
-        android:label="CartFragment" />
+        android:label="CartFragment" >
+        <action
+            android:id="@+id/action_cartFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/productsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.example.myshopping.ui.fragment.ConfirmationFragment"
+        android:label="ConfirmationFragment" >
+        <action
+            android:id="@+id/action_confirmationFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

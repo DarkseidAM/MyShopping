@@ -1,10 +1,7 @@
 package com.example.myshopping.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
+import androidx.room.*
 import androidx.room.OnConflictStrategy.IGNORE
-import androidx.room.Query
 import com.example.myshopping.model.Product
 import com.example.myshopping.model.ProductEntity
 
@@ -18,4 +15,7 @@ interface CartDao {
 
     @Delete
     suspend fun deleteFromCart(product: Product)
+
+    @Query("DELETE FROM PRODUCT")
+    suspend fun deleteAllProductsFromCart()
 }
