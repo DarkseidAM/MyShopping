@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("nancymadan/assignment/db")
+    @GET("darkseidam/productsdb/products")
     suspend fun getProducts(): Response<ProductEntity>
 }
